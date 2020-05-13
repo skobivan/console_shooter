@@ -17,7 +17,9 @@ using namespace std;
 class Player : public GameObject
 {
 private:
-    Gun gun;
+    Gun * pistol;
+    Gun * sniper;
+    Gun * currGun;
     const float speed = 5.0f;
     void move(pair<float, float> step);
     void moveControl();

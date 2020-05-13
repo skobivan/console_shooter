@@ -1,11 +1,15 @@
 #include "player.h"
 
-Player::Player(pair<float, float> startPos, float startAngle, float FOV) : GameObject(startPos, startAngle, FOV) {}
+Player::Player(pair<float, float> startPos, float startAngle, float FOV) : GameObject(startPos, startAngle, FOV) {
+    pistol = new Gun("./resources/animations/pistol_cfg.txt");
+    sniper = new Gun("./resources/animations/snipe_cfg.txt");
+    currGun = pistol;
+}
 
 void Player::logic()
 {
     moveControl();
-    gun.logic();
+    currGun->logic();
 }
 
 void Player::show(wchar_t* screen)
@@ -90,7 +94,7 @@ void Player::show(wchar_t* screen)
         }
     }
     swprintf_s(screen, 40, L"X=%3.2f, Y=%3.2f, A=%3.2f FPS=%3.2f ", position.first, position.second, angle, 1.0f/Globals::elapsedTime);
-    gun.show(screen);
+    currGun->show(screen);
 }
 
 
@@ -152,4 +156,11 @@ void Player::moveControl()
 //        angle -= (speed * 0.75f) * Globals::elapsedTime;
 //    if (GetAsyncKeyState((unsigned short)'V') & 0x8000)
 //        angle += (speed * 0.75f) * Globals::elapsedTime;
+    static bool isClick = false;
+    if ((GetAsyncKeyState('F') & 0x8000) && !isClick) {
+        isClick = true;
+        currGun = (currGun == pistol) ? sniper : pistol;
+    } else if (!(GetAsyncKeyState('F') & 0x8000) && isClick) {
+        isClick = false;
+    }
 }

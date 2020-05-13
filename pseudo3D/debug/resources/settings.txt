@@ -1,0 +1,18 @@
+my_ip 1.1.1.1
+enemy_ip 2.2.2.2
+
+nickname motherfucker
+mouse_sensitivity 0.25
+FOV 90
+
+map_path ./resources/maps/test/test_map.txt
+
+map_width 16
+map_height 16
+
+screen_width 240
+screen_height 120
+
+depth 16.0
+
+FILE_END

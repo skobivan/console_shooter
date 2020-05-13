@@ -2,12 +2,17 @@
 
 Gun::Gun() : GameObject(pair<float, float>(0, 0), 0, 0)
 {
+
+}
+
+Gun::Gun(string cfgPath) : GameObject(pair<float, float>(0, 0), 0, 0)
+{
     vector<string> aNames;
     aNames.push_back("STAND");
     aNames.push_back("MOVE");
     aNames.push_back("SHOOT");
 
-    Loader::loadAnimation("./resources/animations_cfg.txt", stateToAnimation, aNames);
+    Loader::loadAnimation(cfgPath, stateToAnimation, aNames);
 //    else while(1) cout << "NOOO";
 
     texture = stateToAnimation[STAND].animation[0];
@@ -19,8 +24,8 @@ void Gun::show(wchar_t *screen)
 {
     animation->update();
 //    texture = animation->getTexture();
-    for (int i = Globals::screenHeight/2*Globals::screenWidth, j = 0; i < Globals::screenHeight*Globals::screenWidth; ++i, ++j) {
-        if (texture.at(j) != '$') screen[i] = texture.at(j);
+    for (int i = 0; i < Globals::screenHeight*Globals::screenWidth; ++i) {
+        if (texture.at(i) != '$') screen[i] = texture.at(i);
     }
 }
 

@@ -24,6 +24,7 @@ private:
     Animation * animation;
 public:
     Gun();
+    Gun(string cfgPath);
     // Render interface
     void show(wchar_t *screen) override;
     // GameObject interface
